@@ -1,0 +1,6 @@
+@forward '@iwbc/sass-utils/scss/color' with (
+  $colors: (
+    'text': #000,
+  )
+  !default
+);

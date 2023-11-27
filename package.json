@@ -1,0 +1,48 @@
+{
+  "name": "astro-template",
+  "type": "module",
+  "engines": {
+    "node": "~18.18.2"
+  },
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "run-p dev:*",
+    "dev:astro": "astro dev",
+    "dev:indexer": "npm run indexer -- -w",
+    "start": "astro dev",
+    "build": "npm run indexer && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "lint": "npm run lint:script && npm run lint:style",
+    "lint:fix": "npm run lint:script --fix && npm run lint:style --fix",
+    "lint:script": "eslint --ext .ts,.tsx,.astro .",
+    "lint:style": "stylelint \"./src/**/*.{astro,tsx,scss,css}\"",
+    "typecheck": "tsc --noEmit",
+    "indexer": "image-indexer -d ./src/assets/images -o ./src/assets/images.ts"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.3.1",
+    "@iwbc/sass-utils": "^0.1.3",
+    "astro": "^3.5.5",
+    "astro-html-beautifier": "^1.0.4",
+    "typescript": "^5.2.2"
+  },
+  "devDependencies": {
+    "@iwbc/image-indexer": "^0.1.0",
+    "@typescript-eslint/eslint-plugin": "^6.11.0",
+    "@typescript-eslint/parser": "^6.11.0",
+    "eslint": "^8.53.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-astro": "^0.29.1",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-unused-imports": "^3.0.0",
+    "npm-run-all": "^4.1.5",
+    "postcss-html": "^1.5.0",
+    "sass": "^1.69.5",
+    "stylelint": "^15.11.0",
+    "stylelint-config-html": "^1.1.0",
+    "stylelint-config-recess-order": "^4.3.0",
+    "stylelint-config-standard": "^34.0.0",
+    "stylelint-config-standard-scss": "^11.1.0"
+  }
+}

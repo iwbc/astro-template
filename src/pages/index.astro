@@ -1,0 +1,25 @@
+---
+import { I_TEST } from '@/assets/images';
+import { Image } from '@/components/Image';
+import DefaultLayout from '@/layouts/DefaultLayout.astro';
+---
+
+<DefaultLayout>
+  <h1>index.astro</h1>
+  <!--
+    画像をimportして使う場合（最適化される）は自動生成される`@/assets/images`を経由すると補完が効くので便利
+
+    Astro v3.5現在では公式のImageコンポーネントはあまり使い勝手が良くないので暫定的に独自のImageコンポーネントを用意している
+    src2xには2倍サイズの画像を指定する（srcsetには自動で1倍サイズの画像が追加される）
+    SVGや等倍サイズの画像を使う場合はsrc2xの代わりにsrcを指定する
+    アートディレクションに対応したPictureコンポーネントも同様（ブレークポイントmin-width: 767.98px以外を使う場合はコンポーネントの修正が必要）
+  -->
+  <div><Image src2x={I_TEST} alt="" /></div>
+</DefaultLayout>
+
+<style lang="scss">
+  h1 {
+    // 各sass-utilsは、`astro.config.mjs`で`@/assets/styles/utils.scss`をuseしているので改めてuseする必要はない
+    color: u.c-get('text');
+  }
+</style>

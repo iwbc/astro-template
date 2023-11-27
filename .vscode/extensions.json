@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "mikestead.dotenv",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "stylelint.vscode-stylelint",
+    "astro-build.astro-vscode",
+    "EditorConfig.EditorConfig"
+  ],
+  "unwantedRecommendations": []
+}

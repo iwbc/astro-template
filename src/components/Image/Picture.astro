@@ -1,0 +1,67 @@
+---
+import type { GetImageResult, ImageMetadata } from 'astro';
+import { getImage, type LocalImageProps } from 'astro:assets';
+
+type Props = Omit<LocalImageProps, 'src'> & { srcSp: ImageMetadata } & (
+    | {
+        srcPc: ImageMetadata;
+        srcPc2x?: never;
+      }
+    | {
+        srcPc?: never;
+        srcPc2x: ImageMetadata;
+      }
+  );
+
+const { srcPc, srcPc2x, srcSp, alt, ...attrs } = Astro.props;
+
+// attrsに`data-astro-cid-*`が含まれているため、異なるコンポーネント間で使用すると同じ画像でも重複生成されてしまう問題を回避
+// astro 3.1.1では、標準のImageコンポーネントでも同様の問題が発生する
+const attrsPickAstroCid = Object.fromEntries(
+  Object.entries(attrs).filter(([key]) => key.indexOf('data-astro-cid-') === 0),
+);
+const attrsWithoutAstroCid = Object.fromEntries(
+  Object.entries(attrs).filter(([key]) => key.indexOf('data-astro-cid-') !== 0),
+);
+
+let pc1x: GetImageResult | null = null;
+let pc2x: GetImageResult | null = null;
+
+if (srcPc && !srcPc2x) {
+  pc1x = await getImage({ src: srcPc, quality: 'max', ...attrsWithoutAstroCid });
+} else if (!srcPc && srcPc2x) {
+  pc2x = await getImage({ src: srcPc2x, quality: 'max', ...attrsWithoutAstroCid });
+  pc1x = await getImage({
+    src: srcPc2x,
+    width: Math.floor(pc2x.attributes.width / 2),
+    quality: 'max',
+    ...attrsWithoutAstroCid,
+  });
+} else {
+  throw new Error('Either `srcPc` or `srcPc2x` must be provided, but not both.');
+}
+
+const sp2x = await getImage({ src: srcSp, quality: 'max', ...attrsWithoutAstroCid });
+
+const attributes = {
+  ...attrsPickAstroCid,
+  ...pc1x.attributes,
+  width: Math.ceil(pc1x.attributes.width),
+  height: Math.ceil(pc1x.attributes.height),
+};
+---
+
+<picture>
+  <source
+    srcset={sp2x.src}
+    width={Math.ceil(sp2x.attributes.width)}
+    height={Math.ceil(sp2x.attributes.height)}
+    media="(max-width: 767.98px)"
+  />
+  {srcPc && <img src={pc1x.src} alt={alt} {...attributes} />}
+  {
+    srcPc2x && pc1x && pc2x && (
+      <img src={pc1x.src} srcset={`${pc1x.src} 1x, ${pc2x.src} 2x`} alt={alt} {...attributes} />
+    )
+  }
+</picture>

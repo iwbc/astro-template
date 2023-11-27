@@ -1,0 +1,45 @@
+:root {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scrollbar-gutter: stable;
+
+  &:has(dialog:modal) {
+    overflow: hidden;
+    overscroll-behavior: none;
+    touch-action: none;
+  }
+}
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  color: u.c-get('text');
+}
+
+:where(a:any-link) {
+  color: u.c-get('text');
+}
+
+.pc-only {
+  @include u.bp-max('sp') {
+    display: none;
+  }
+}
+
+.sp-only {
+  @include u.bp-min('pc') {
+    display: none;
+  }
+}
+
+@page {
+  size: 1280px;
+}
+
+@media print {
+  body {
+    min-width: 1280px;
+  }
+}

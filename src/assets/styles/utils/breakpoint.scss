@@ -1,0 +1,7 @@
+@forward '@iwbc/sass-utils/scss/breakpoint' with (
+  $breakpoints: (
+    'sp': 0,
+    'pc': 768px,
+  )
+  !default
+);
