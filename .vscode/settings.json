@@ -1,22 +1,23 @@
 {
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "emmet.includeLanguages": {
+    "astro": "html"
+  },
   "css.validate": false,
   "less.validate": false,
   "scss.validate": false,
-  "stylelint.validate": [
-    "css",
-    "less",
-    "postcss",
-    "scss",
-    "typescriptreact",
-    "astro"
-  ],
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "astro"
-  ],
+  "stylelint.validate": ["css", "less", "postcss", "scss", "typescriptreact", "astro"],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "astro"],
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true
 }
