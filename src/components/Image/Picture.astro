@@ -18,10 +18,10 @@ const { srcPc, srcPc2x, srcSp, alt, ...attrs } = Astro.props;
 // attrsに`data-astro-cid-*`が含まれているため、異なるコンポーネント間で使用すると同じ画像でも重複生成されてしまう問題を回避
 // astro 3.1.1では、標準のImageコンポーネントでも同様の問題が発生する
 const attrsPickAstroCid = Object.fromEntries(
-  Object.entries(attrs).filter(([key]) => key.indexOf('data-astro-cid-') === 0),
+  Object.entries(attrs).filter(([key]) => key.indexOf('data-astro-cid-') === 0)
 );
 const attrsWithoutAstroCid = Object.fromEntries(
-  Object.entries(attrs).filter(([key]) => key.indexOf('data-astro-cid-') !== 0),
+  Object.entries(attrs).filter(([key]) => key.indexOf('data-astro-cid-') !== 0)
 );
 
 let pc1x: GetImageResult | null = null;

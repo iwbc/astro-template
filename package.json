@@ -15,7 +15,7 @@
     "astro": "astro",
     "lint": "npm run lint:script && npm run lint:style",
     "lint:fix": "npm run lint:script --fix && npm run lint:style --fix",
-    "lint:script": "eslint --ext .ts,.tsx,.astro .",
+    "lint:script": "eslint .",
     "lint:style": "stylelint \"./src/**/*.{astro,tsx,scss,css}\"",
     "typecheck": "tsc --noEmit",
     "indexer": "image-indexer -d ./src/assets/images -o ./src/assets/images.ts"
@@ -28,14 +28,17 @@
     "typescript": "^5.6.2"
   },
   "devDependencies": {
+    "@eslint/js": "^9.11.1",
     "@iwbc/image-indexer": "^0.1.0",
-    "@typescript-eslint/eslint-plugin": "^6.11.0",
-    "@typescript-eslint/parser": "^6.11.0",
-    "eslint": "^8.53.0",
-    "eslint-import-resolver-typescript": "^3.6.1",
-    "eslint-plugin-astro": "^0.29.1",
-    "eslint-plugin-import": "^2.29.0",
-    "eslint-plugin-unused-imports": "^3.0.0",
+    "@types/eslint__js": "^8.42.3",
+    "@types/eslint-config-prettier": "^6.11.3",
+    "eslint": "^9.11.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-import-resolver-typescript": "^3.6.3",
+    "eslint-plugin-astro": "^1.2.4",
+    "eslint-plugin-import-x": "^4.3.0",
+    "eslint-plugin-unused-imports": "^4.1.4",
+    "globals": "^15.9.0",
     "npm-run-all": "^4.1.5",
     "postcss-html": "^1.5.0",
     "sass": "^1.69.5",
@@ -43,6 +46,7 @@
     "stylelint-config-html": "^1.1.0",
     "stylelint-config-recess-order": "^4.3.0",
     "stylelint-config-standard": "^34.0.0",
-    "stylelint-config-standard-scss": "^11.1.0"
+    "stylelint-config-standard-scss": "^11.1.0",
+    "typescript-eslint": "^8.7.0"
   }
 }
