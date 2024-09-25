@@ -1,5 +1,4 @@
 ---
-import '@/assets/styles/reset.scss';
 import '@/assets/styles/global.scss';
 ---
 
@@ -41,15 +40,35 @@ import '@/assets/styles/global.scss';
 </html>
 
 <script>
-  document.documentElement.style.scrollBehavior = 'smooth';
+  import isMobile from 'ismobilejs';
+  import { debounce } from 'throttle-debounce';
 
-  const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-  document.documentElement.style.setProperty('--scrollbar-width', (scrollbarWidth > 0 ? scrollbarWidth : 0) + 'px');
+  function setViewport() {
+    const screenWidth = window.screen.width;
+    let viewport = 'width=device-width';
 
-  const ua = navigator.userAgent;
-  if (
-    !(ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || (ua.indexOf('Android') > 0 && ua.indexOf('Mobile') > 0))
-  ) {
-    document.querySelector('meta[name=viewport]')?.setAttribute('content', 'width=1280');
+    if (isMobile().phone) {
+      if (screenWidth < 375) {
+        viewport = 'width=375';
+      } else {
+        viewport = 'width=device-width';
+      }
+    } else {
+      viewport = 'width=1280';
+    }
+
+    document.querySelector('meta[name=viewport]')?.setAttribute('content', viewport);
   }
+
+  function setScrollbarWidthCSSProp() {
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    document.documentElement.style.setProperty('--scrollbar-width', (scrollbarWidth > 0 ? scrollbarWidth : 0) + 'px');
+  }
+
+  setViewport();
+  setScrollbarWidthCSSProp();
+  window.addEventListener('resize', debounce(100, setViewport));
+  window.addEventListener('resize', debounce(100, setScrollbarWidthCSSProp));
+
+  document.documentElement.style.scrollBehavior = 'smooth';
 </script>

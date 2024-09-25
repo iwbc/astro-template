@@ -19,7 +19,7 @@ import DefaultLayout from '@/layouts/DefaultLayout.astro';
 
 <style lang="scss">
   h1 {
-    // 各sass-utilsは、`astro.config.mjs`で`@/assets/styles/utils.scss`をuseしているので改めてuseする必要はない
-    color: u.c-get('text');
+    // 各sass-utilsは、`astro.config.ts`で@useしているので改めてする必要はない
+    color: color.get('text');
   }
 </style>

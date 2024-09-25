@@ -8,5 +8,7 @@ export default {
     // SCSSで擬似クラスやネストを使うと、このルールが邪魔になる
     // https://github.com/stylelint/stylelint/issues/4271
     'no-descending-specificity': null,
+    // @import, @use, @forward, meta.load-cssで拡張子を必須にする
+    'scss/load-partial-extension': 'always',
   },
 };

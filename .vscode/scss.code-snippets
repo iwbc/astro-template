@@ -1,16 +1,16 @@
 {
-  "sass-utils breakpoint mixin min": {
+  "Mixin breakpoint min": {
     "prefix": "bpmin",
-    "body": ["@include u.bp-min('${1:pc}') {", "  $0", "}"]
+    "body": ["@include breakpoint.min('${1:tab}') {", "  $0", "}"],
   },
 
-  "sass-utils breakpoint mixin max": {
+  "Mixin breakpoint max": {
     "prefix": "bpmax",
-    "body": ["@include u.bp-max('${1:sp}') {", "  $0", "}"]
+    "body": ["@include breakpoint.max('${1:sp}') {", "  $0", "}"],
   },
 
-  "sass-utils hover mixin this": {
+  "Mixin hover this": {
     "prefix": "hover",
-    "body": ["@include u.h-this {", "  $0", "}"]
-  }
+    "body": ["@include hover.this {", "  $0", "}"],
+  },
 }

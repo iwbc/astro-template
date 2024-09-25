@@ -32,7 +32,12 @@ export default defineConfig({
         scss: {
           api: 'modern-compiler',
           additionalData: `
-            @use "@/assets/styles/utils" as u;
+            @use "@/assets/styles/utils/vars.scss";
+            @use "@/assets/styles/utils/breakpoint.scss";
+            @use "@/assets/styles/utils/color.scss";
+            @use "@/assets/styles/utils/hover.scss";
+            @use "@/assets/styles/utils/unit.scss";
+            @use "@/assets/styles/utils/z.scss";
           `,
         },
       },
