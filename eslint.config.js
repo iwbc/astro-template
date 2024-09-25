@@ -90,6 +90,7 @@ export default tsEslint.config(
   {
     rules: {
       'no-console': 'warn',
+      '@typescript-eslint/ban-ts-comment': 'off',
     },
   },
 );

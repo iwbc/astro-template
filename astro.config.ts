@@ -12,6 +12,7 @@ export default defineConfig({
     htmlBeautifier({
       indent_size: 2,
       indent_char: ' ',
+      // @ts-ignore js-beautifyのオプション
       content_unformatted: ['script', 'style'],
       preserve_newlines: true,
       max_preserve_newlines: 1,
@@ -29,17 +30,11 @@ export default defineConfig({
     css: {
       preprocessorOptions: {
         scss: {
+          api: 'modern-compiler',
           additionalData: `
             @use "@/assets/styles/utils" as u;
           `,
         },
-      },
-    },
-  },
-  rollupOptions: {
-    output: {
-      globals: {
-        jquery: 'window.jQuery',
       },
     },
   },
