@@ -14,7 +14,7 @@ type Props = Omit<LocalImageProps, 'src'> &
       }
   );
 
-const { src, src2x, alt, ...attrs } = Astro.props;
+const { src, src2x, alt, loading, ...attrs } = Astro.props;
 
 // attrsに`data-astro-cid-*`が含まれているため、異なるコンポーネント間で使用すると同じ画像でも重複生成されてしまう問題を回避
 // astro 3.1.1では、標準のImageコンポーネントでも同様の問題が発生する
@@ -51,10 +51,16 @@ const attributes = {
 ---
 
 <>
-  {src && <img src={img1x.src} alt={alt} {...attributes} />}
+  {src && <img src={img1x.src} alt={alt} loading={loading ?? 'lazy'} {...attributes} />}
   {
     src2x && img1x && img2x && (
-      <img src={img1x.src} srcset={`${img1x.src} 1x, ${img2x.src} 2x`} alt={alt} {...attributes} />
+      <img
+        src={img1x.src}
+        srcset={`${img1x.src} 1x, ${img2x.src} 2x`}
+        alt={alt}
+        loading={loading ?? 'lazy'}
+        {...attributes}
+      />
     )
   }
 </>
