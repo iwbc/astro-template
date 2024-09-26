@@ -24,10 +24,10 @@ export default defineConfig({
     htmlBeautifier({
       indent_size: 2,
       indent_char: ' ',
+      preserve_newlines: false,
+      end_with_newline: true,
       // @ts-ignore js-beautifyのオプション
       content_unformatted: ['script', 'style'],
-      preserve_newlines: true,
-      max_preserve_newlines: 1,
     }),
   ],
   compressHTML: false,

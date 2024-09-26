@@ -5,6 +5,17 @@ export default {
     '\\.astro$': '@markuplint/astro-parser',
   },
   extends: ['markuplint:recommended'],
+  rules: {
+    'heading-levels': false,
+  },
+  nodeRules: [
+    {
+      selector: ':where(script[src]:not([type=module]))',
+      rules: {
+        'required-attr': false,
+      },
+    },
+  ],
   overrides: {
     'src/components/base/image/Picture.astro': {
       nodeRules: [
@@ -17,4 +28,5 @@ export default {
       ],
     },
   },
+  overrideMode: 'merge',
 } satisfies Config;
