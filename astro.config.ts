@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import htmlBeautifier from 'astro-html-beautifier';
+import icon from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
@@ -9,6 +10,17 @@ export default defineConfig({
     host: true,
   },
   integrations: [
+    icon({
+      svgoOptions: {
+        plugins: [
+          'preset-default',
+          {
+            name: 'convertColors',
+            params: { currentColor: true },
+          },
+        ],
+      },
+    }),
     htmlBeautifier({
       indent_size: 2,
       indent_char: ' ',
