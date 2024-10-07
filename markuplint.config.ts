@@ -20,7 +20,7 @@ export default {
     'src/components/base/image/Picture.astro': {
       nodeRules: [
         {
-          selector: 'img',
+          selector: 'picture',
           rules: {
             'permitted-contents': false,
           },
