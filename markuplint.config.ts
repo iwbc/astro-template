@@ -17,7 +17,7 @@ export default {
     },
   ],
   overrides: {
-    'src/components/base/image/Picture.astro': {
+    'src/components/parts/image/Picture.astro': {
       nodeRules: [
         {
           selector: 'picture',
