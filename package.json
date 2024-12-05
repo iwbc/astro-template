@@ -2,7 +2,7 @@
   "name": "astro-template",
   "type": "module",
   "engines": {
-    "node": "^20.17.0"
+    "node": "^22.0.0"
   },
   "version": "1.0.1",
   "scripts": {
