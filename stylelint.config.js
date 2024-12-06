@@ -8,5 +8,7 @@ export default {
     // SCSSで擬似クラスやネストを使うと、このルールが邪魔になる
     // https://github.com/stylelint/stylelint/issues/4271
     'no-descending-specificity': null,
+    // Astroのグローバル擬似クラスを許容する
+    'selector-pseudo-class-no-unknown': [true, { ignorePseudoClasses: ['global'] }],
   },
 };

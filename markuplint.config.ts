@@ -7,6 +7,7 @@ export default {
   extends: ['markuplint:recommended'],
   rules: {
     'heading-levels': false,
+    'no-refer-to-non-existent-id': false,
   },
   nodeRules: [
     {
