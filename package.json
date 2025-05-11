@@ -25,9 +25,9 @@
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@iwbc/sass-utils": "^0.4.1",
-    "astro": "^4.16.16",
+    "astro": "^5.7.12",
     "astro-html-beautifier": "^1.0.4",
-    "astro-icon": "^1.1.4",
+    "astro-icon": "^1.1.5",
     "ismobilejs": "^1.1.1",
     "throttle-debounce": "^5.0.2",
     "typescript": "^5.7.2"
