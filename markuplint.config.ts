@@ -11,7 +11,13 @@ export default {
   },
   nodeRules: [
     {
-      selector: ':where(script[src]:not([type=module]))',
+      selector: 'script[src]:not([type=module])',
+      rules: {
+        'required-attr': false,
+      },
+    },
+    {
+      selector: 'noscript iframe',
       rules: {
         'required-attr': false,
       },
