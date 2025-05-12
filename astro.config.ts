@@ -47,6 +47,7 @@ export default defineConfig({
             @use "@/assets/styles/utils/vars.scss";
             @use "@/assets/styles/utils/breakpoint.scss";
             @use "@/assets/styles/utils/color.scss";
+            @use "@/assets/styles/utils/easing.scss";
             @use "@/assets/styles/utils/hover.scss";
             @use "@/assets/styles/utils/unit.scss";
             @use "@/assets/styles/utils/z.scss";
