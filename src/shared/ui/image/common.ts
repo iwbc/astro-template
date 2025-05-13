@@ -4,7 +4,7 @@ import { isImageMetadata } from 'node_modules/astro/dist/assets/types';
 
 export async function getImageMetadata(src: LocalImageProps['src'] | string) {
   if (typeof src === 'string') {
-    const images = import.meta.glob<{ default: ImageMetadata }>('/src/**/*.{jpg,jpeg,png,gif,webp,avif}');
+    const images = import.meta.glob<{ default: ImageMetadata }>('/src/**/*.{jpg,jpeg,png,gif,svg,webp,avif}');
     const resolvedSrc = '/src/' + src.replace(/^@\/|^\/src\/|^\//, '');
     if (!images[resolvedSrc]) {
       throw new Error(`${resolvedSrc} is not found in the images folder.`);
