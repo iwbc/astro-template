@@ -1,8 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 
-import Image from '@/shared/ui/image/Image.astro';
-import Picture from '@/shared/ui/image/Picture.astro';
+import { Image, ImagePicture } from '@/shared/ui/image';
 import { DefaultLayout } from '@/shared/ui/layout';
 
 import ExampleHomeComponent from './ExampleHomeComponent.astro';
@@ -18,7 +17,7 @@ import ExampleHomeComponent from './ExampleHomeComponent.astro';
 
   <div>
     <h2>Picutre Component</h2>
-    <Picture
+    <ImagePicture
       src="@/views/home/assets/images/sample-picture-sm.jpg"
       alt=""
       densities={[2]}
@@ -44,19 +43,19 @@ import ExampleHomeComponent from './ExampleHomeComponent.astro';
 
   <h2>Child Component</h2>
   <ExampleHomeComponent />
-
-  <style lang="scss">
-    body {
-      padding: 20px;
-    }
-
-    h1 {
-      // 各sass-utilsは、`astro.config.ts`で@useしているので改めてする必要はない
-      color: color.get('text');
-    }
-
-    h2 {
-      margin-top: 50px;
-    }
-  </style>
 </DefaultLayout>
+
+<style lang="scss">
+  body {
+    padding: 20px;
+  }
+
+  h1 {
+    // 各sass-utilsは、`astro.config.ts`で@useしているので改めてする必要はない
+    color: color.get('text');
+  }
+
+  h2 {
+    margin-top: 50px;
+  }
+</style>

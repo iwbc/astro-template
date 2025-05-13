@@ -23,17 +23,29 @@ export default {
       },
     },
   ],
-  overrides: {
-    'src/components/parts/image/Picture.astro': {
-      nodeRules: [
-        {
-          selector: 'picture',
-          rules: {
-            'permitted-contents': false,
-          },
-        },
-      ],
+  pretenders: [
+    {
+      selector: 'Image',
+      as: {
+        element: 'img',
+        inheritAttrs: true,
+        attrs: [
+          { name: 'width', value: '1' },
+          { name: 'height', value: '1' },
+        ],
+      },
     },
-  },
+    {
+      selector: 'ImagePicture',
+      as: {
+        element: 'img',
+        inheritAttrs: true,
+        attrs: [
+          { name: 'width', value: '1' },
+          { name: 'height', value: '1' },
+        ],
+      },
+    },
+  ],
   overrideMode: 'merge',
 } satisfies Config;
