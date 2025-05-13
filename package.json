@@ -2,23 +2,19 @@
   "name": "astro-template",
   "type": "module",
   "engines": {
-    "node": "^22.0.0"
+    "node": "^22.11.0"
   },
   "version": "1.1.0",
   "scripts": {
-    "dev": "run-p dev:*",
-    "dev:astro": "astro dev",
-    "dev:indexer": "npm run indexer -- -w",
-    "start": "astro dev",
-    "build": "npm run indexer && astro build",
+    "dev": "astro dev",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
     "lint": "run-p lint:*",
     "lint:markup": "markuplint './src/**/*.{html,astro}'",
     "lint:script": "eslint .",
     "lint:style": "stylelint \"./src/**/*.{astro,tsx,scss,css}\"",
-    "typecheck": "tsc --noEmit",
-    "indexer": "image-indexer -d ./src/assets/images -o ./src/assets/images.ts",
+    "check": "astro check",
     "lint-staged": "lint-staged",
     "prepare": "husky"
   },
@@ -34,9 +30,9 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.26.0",
-    "@iwbc/image-indexer": "^0.1.0",
     "@markuplint/astro-parser": "^4.6.19",
     "@markuplint/ml-config": "^4.8.11",
+    "@total-typescript/ts-reset": "^0.6.1",
     "@types/eslint-config-prettier": "^6.11.3",
     "@types/throttle-debounce": "^5.0.2",
     "eslint": "^9.26.0",

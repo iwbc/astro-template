@@ -1,5 +1,5 @@
 export default {
-  '*.{ts,astro}': () => 'tsc -p tsconfig.json --noEmit',
+  '*.{ts,astro}': () => 'astro check',
   '*.{html,astro}': 'markuplint',
   '*.{js,ts,astro}': 'eslint',
   '*.{css,scss,astro}': 'stylelint',

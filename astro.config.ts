@@ -11,6 +11,7 @@ export default defineConfig({
   },
   integrations: [
     icon({
+      iconDir: 'src/shared/assets/icons',
       svgoOptions: {
         plugins: [
           'preset-default',
@@ -44,13 +45,13 @@ export default defineConfig({
         scss: {
           api: 'modern-compiler',
           additionalData: `
-            @use "@/assets/styles/utils/vars.scss";
-            @use "@/assets/styles/utils/breakpoint.scss";
-            @use "@/assets/styles/utils/color.scss";
-            @use "@/assets/styles/utils/easing.scss";
-            @use "@/assets/styles/utils/hover.scss";
-            @use "@/assets/styles/utils/unit.scss";
-            @use "@/assets/styles/utils/z.scss";
+            @use "@/app/styles/utils/vars.scss";
+            @use "@/app/styles/utils/breakpoint.scss";
+            @use "@/app/styles/utils/color.scss";
+            @use "@/app/styles/utils/easing.scss";
+            @use "@/app/styles/utils/hover.scss";
+            @use "@/app/styles/utils/unit.scss";
+            @use "@/app/styles/utils/z.scss";
           `,
         },
       },

@@ -1,0 +1,68 @@
+---
+import type { UnresolvedImageTransform } from 'astro';
+import type { HTMLAttributes } from 'astro/types';
+import type { LocalImageProps } from 'astro:assets';
+import { getImage } from 'astro:assets';
+
+import { BREAKPOINT_KEYS, BREAKPOINTS } from '@/shared/consts/breakpoint';
+import { getImageMetadata, getMaxDensity } from '@/shared/ui/image/common';
+
+type Img = Omit<LocalImageProps, 'src'> & {
+  src: LocalImageProps['src'] | string;
+};
+
+type Source = Pick<LocalImageProps, 'width' | 'height' | 'densities'> & {
+  src: LocalImageProps['src'] | string;
+  media: string;
+};
+
+type Props = Img & {
+  sources?: Source[];
+};
+
+const { sources = [], ...img } = Astro.props;
+sources.reverse();
+
+const imgImage = await (async () => {
+  img.src = await getImageMetadata(img.src);
+  img.width = Math.floor(img.src.width / getMaxDensity(img.densities));
+
+  const image = await getImage(img as UnresolvedImageTransform);
+  const attrs: HTMLAttributes<'img'> = {};
+
+  if (image.srcSet.values.length > 0) {
+    attrs.srcset = image.srcSet.attribute;
+  }
+
+  return { src: image.src, attributes: { ...image.attributes, ...attrs } };
+})();
+
+const sourceImages = await Promise.all(
+  sources.map(async (source) => {
+    source.src = await getImageMetadata(source.src);
+    source.width = Math.floor(source.src.width / getMaxDensity(source.densities));
+
+    const image = await getImage(source as UnresolvedImageTransform);
+    const attrs: HTMLAttributes<'source'> = {};
+
+    if (image.srcSet.values.length > 0) {
+      attrs.srcset = image.srcSet.attribute;
+    }
+
+    attrs.srcset = attrs.srcset == null ? image.src : [image.src, attrs.srcset].join(', ');
+    attrs.media = BREAKPOINT_KEYS.includes(source.media) ? `(min-width: ${BREAKPOINTS[source.media]})` : source.media;
+
+    return {
+      srcset: attrs.srcset,
+      width: image.attributes.width,
+      height: image.attributes.height,
+      media: attrs.media,
+    };
+  })
+);
+---
+
+<picture>
+  {sourceImages.map((attrs) => <source {...attrs} />)}
+  <img src={imgImage.src} {...imgImage.attributes} />
+</picture>

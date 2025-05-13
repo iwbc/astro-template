@@ -1,0 +1,62 @@
+---
+import { Icon } from 'astro-icon/components';
+
+import Image from '@/shared/ui/image/Image.astro';
+import Picture from '@/shared/ui/image/Picture.astro';
+import { DefaultLayout } from '@/shared/ui/layout';
+
+import ExampleHomeComponent from './ExampleHomeComponent.astro';
+---
+
+<DefaultLayout>
+  <h1>index.astro</h1>
+
+  <div>
+    <h2>Image Component</h2>
+    <Image src="@/views/home/assets/images/sample-img.jpg" alt="alt" densities={[2]} />
+  </div>
+
+  <div>
+    <h2>Picutre Component</h2>
+    <Picture
+      src="@/views/home/assets/images/sample-picture-sm.jpg"
+      alt=""
+      densities={[2]}
+      sources={[
+        {
+          src: '@/views/home/assets/images/sample-picture-nm.jpg',
+          media: 'tab',
+          densities: [2],
+        },
+        {
+          src: '@/views/home/assets/images/sample-picture-lg.jpg',
+          media: '(min-width: 1024px)',
+          densities: [2],
+        },
+      ]}
+    />
+  </div>
+
+  <div>
+    <h2>Icon Component</h2>
+    <Icon name="sample" />
+  </div>
+
+  <h2>Child Component</h2>
+  <ExampleHomeComponent />
+
+  <style lang="scss">
+    body {
+      padding: 20px;
+    }
+
+    h1 {
+      // 各sass-utilsは、`astro.config.ts`で@useしているので改めてする必要はない
+      color: color.get('text');
+    }
+
+    h2 {
+      margin-top: 50px;
+    }
+  </style>
+</DefaultLayout>

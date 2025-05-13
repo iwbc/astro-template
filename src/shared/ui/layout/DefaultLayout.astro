@@ -1,6 +1,5 @@
 ---
-import '@/assets/styles/global.scss';
-import Header from '@/components/common/Header/index.astro';
+// DefaultLayout.astro
 ---
 
 <html lang="ja">
@@ -34,11 +33,10 @@ import Header from '@/components/common/Header/index.astro';
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />
 
-    <script src="@/assets/scripts/global.ts"></script>
+    <script src="@/app/scripts/global.ts"></script>
   </head>
 
   <body>
-    <Header />
     <slot />
   </body>
 </html>
