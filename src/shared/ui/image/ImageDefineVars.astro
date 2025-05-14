@@ -1,0 +1,46 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { getImage, type LocalImageProps } from 'astro:assets';
+
+import { getImageMetadata } from './common';
+
+type Image = {
+  src: LocalImageProps['src'] | string;
+  name: string;
+};
+
+type Props = Pick<LocalImageProps, 'quality'> &
+  HTMLAttributes<'div'> & {
+    images: Image | Image[];
+    tag?: keyof HTMLElementTagNameMap;
+  };
+
+const { images, tag: TagName = 'div', quality = 'max', ...props } = Astro.props;
+const imagesArray = Array.isArray(images) ? images : [images];
+
+const results = await Promise.all(
+  imagesArray.map(async (image) => {
+    return {
+      image: await getImage({
+        src: await getImageMetadata(image.src),
+        quality,
+      }),
+      name: image.name,
+    };
+  })
+);
+
+const style = results
+  .map((result) => {
+    if (!/^[a-zA-Z0-9-_]+$/.test(result.name)) {
+      throw new Error(`Invalid name for CSS variable: ${result.name}`);
+    }
+
+    return `--${result.name}: url(${result.image.src});`;
+  })
+  .join(' ');
+---
+
+<TagName {...props} style={style}>
+  <slot />
+</TagName>

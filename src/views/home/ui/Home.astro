@@ -1,7 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 
-import { Image, ImagePicture } from '@/shared/ui/image';
+import { Image, ImagePicture, ImageDefineVars } from '@/shared/ui/image';
 import { DefaultLayout } from '@/shared/ui/layout';
 
 import ExampleHomeComponent from './ExampleHomeComponent.astro';
@@ -16,7 +16,7 @@ import ExampleHomeComponent from './ExampleHomeComponent.astro';
   </div>
 
   <div>
-    <h2>Picutre Component</h2>
+    <h2>ImagePicutre Component</h2>
     <ImagePicture
       src="@/views/home/assets/images/sample-picture-sm.jpg"
       alt=""
@@ -34,6 +34,13 @@ import ExampleHomeComponent from './ExampleHomeComponent.astro';
         },
       ]}
     />
+  </div>
+
+  <div>
+    <h2>ImageDefineVars Component（Define CSS Variables）</h2>
+    <ImageDefineVars images={[{ src: '@/views/home/assets/images/sample-img.jpg', name: 'sample-bg' }]} class="bg">
+      <div>Content</div>
+    </ImageDefineVars>
   </div>
 
   <div>
@@ -57,5 +64,15 @@ import ExampleHomeComponent from './ExampleHomeComponent.astro';
 
   h2 {
     margin-top: 50px;
+  }
+
+  .bg {
+    display: grid;
+    place-items: center;
+    width: 200px;
+    height: 200px;
+    color: #fff;
+    // ImageDefineVarsコンポーネントで読み込んだ画像はCSS変数として使用可能になる
+    background: var(--sample-bg);
   }
 </style>

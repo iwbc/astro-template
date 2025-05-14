@@ -18,11 +18,12 @@ type Source = Pick<LocalImageProps, 'width' | 'height' | 'densities' | 'quality'
 };
 
 type Props = Img & {
-  sources?: Source[];
+  sources?: Source | Source[];
 };
 
 const { sources = [], ...img } = Astro.props;
-sources.reverse();
+const sourcesArray = Array.isArray(sources) ? sources : [sources];
+sourcesArray.reverse();
 
 const imgImage = await (async () => {
   img.src = await getImageMetadata(img.src);
@@ -40,7 +41,7 @@ const imgImage = await (async () => {
 })();
 
 const sourceImages = await Promise.all(
-  sources.map(async (source) => {
+  sourcesArray.map(async (source) => {
     source.src = await getImageMetadata(source.src);
     source.width = Math.floor(source.src.width / getMaxDensity(source.densities));
     source.quality = source.quality ?? 'max';
