@@ -4,14 +4,15 @@ import type { HTMLAttributes } from 'astro/types';
 import type { LocalImageProps } from 'astro:assets';
 import { getImage } from 'astro:assets';
 
-import { BREAKPOINT_KEYS, BREAKPOINTS } from '@/shared/consts/breakpoint';
-import { getImageMetadata, getMaxDensity } from '@/shared/ui/image/common';
+import { BREAKPOINT_KEYS, BREAKPOINTS } from '@/shared/consts';
+
+import { getImageMetadata, getMaxDensity } from './common';
 
 type Img = Omit<LocalImageProps, 'src'> & {
   src: LocalImageProps['src'] | string;
 };
 
-type Source = Pick<LocalImageProps, 'width' | 'height' | 'densities'> & {
+type Source = Pick<LocalImageProps, 'width' | 'height' | 'densities' | 'quality'> & {
   src: LocalImageProps['src'] | string;
   media: string;
 };
@@ -26,6 +27,7 @@ sources.reverse();
 const imgImage = await (async () => {
   img.src = await getImageMetadata(img.src);
   img.width = Math.floor(img.src.width / getMaxDensity(img.densities));
+  img.quality = img.quality ?? 'max';
 
   const image = await getImage(img as UnresolvedImageTransform);
   const attrs: HTMLAttributes<'img'> = {};
@@ -41,6 +43,7 @@ const sourceImages = await Promise.all(
   sources.map(async (source) => {
     source.src = await getImageMetadata(source.src);
     source.width = Math.floor(source.src.width / getMaxDensity(source.densities));
+    source.quality = source.quality ?? 'max';
 
     const image = await getImage(source as UnresolvedImageTransform);
     const attrs: HTMLAttributes<'source'> = {};

@@ -2,7 +2,7 @@
 import type { LocalImageProps } from 'astro:assets';
 import { Image as AstroImage } from 'astro:assets';
 
-import { getImageMetadata, getMaxDensity } from '@/shared/ui/image/common';
+import { getImageMetadata, getMaxDensity } from './common';
 
 type Props = Omit<LocalImageProps, 'src'> & {
   src: LocalImageProps['src'] | string;
@@ -12,6 +12,7 @@ const props = Astro.props;
 
 props.src = await getImageMetadata(props.src);
 props.width = Math.floor(props.src.width / getMaxDensity(props.densities));
+props.quality = props.quality ?? 'max';
 ---
 
 <AstroImage {...props as LocalImageProps} />
