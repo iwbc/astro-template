@@ -10,5 +10,7 @@ export default {
     'no-descending-specificity': null,
     // globalとexport擬似クラスを許容する
     'selector-pseudo-class-no-unknown': [true, { ignorePseudoClasses: ['global', 'export'] }],
+    // :exportセレクタ内では不明なプロパティを許容する
+    'property-no-unknown': [true, { ignoreSelectors: [':export'] }],
   },
 };

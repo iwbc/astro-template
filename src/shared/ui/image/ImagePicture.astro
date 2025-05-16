@@ -4,7 +4,7 @@ import type { HTMLAttributes } from 'astro/types';
 import type { LocalImageProps } from 'astro:assets';
 import { getImage } from 'astro:assets';
 
-import { BREAKPOINT_KEYS, BREAKPOINTS } from '@/shared/consts';
+import { BREAKPOINT_KEYS, BREAKPOINTS, PRINT_MIN_WIDTH } from '@/shared/consts';
 
 import { getImageMetadata, getMaxDensity } from './common';
 
@@ -54,7 +54,15 @@ const sourceImages = await Promise.all(
     }
 
     attrs.srcset = attrs.srcset == null ? image.src : [image.src, attrs.srcset].join(', ');
-    attrs.media = BREAKPOINT_KEYS.includes(source.media) ? `(min-width: ${BREAKPOINTS[source.media]})` : source.media;
+    if (BREAKPOINT_KEYS.includes(source.media)) {
+      if (PRINT_MIN_WIDTH !== 'false' && parseInt(PRINT_MIN_WIDTH) <= parseInt(BREAKPOINTS[source.media])) {
+        attrs.media = `print, (min-width: ${BREAKPOINTS[source.media]})`;
+      } else {
+        attrs.media = `(min-width: ${BREAKPOINTS[source.media]})`;
+      }
+    } else {
+      attrs.media = source.media;
+    }
 
     return {
       srcset: attrs.srcset,

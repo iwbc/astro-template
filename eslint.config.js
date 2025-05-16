@@ -8,7 +8,7 @@ import unusedImportsPlugin from 'eslint-plugin-unused-imports';
 import globals from 'globals';
 import tsEslint from 'typescript-eslint';
 
-const ignoresConfig = tsEslint.config({ ignores: ['dist/', 'src/env.d.ts', 'src/assets/vendors/', '.astro'] });
+const ignoresConfig = tsEslint.config({ ignores: ['dist/', '.astro/', 'src/env.d.ts'] });
 
 const filesConfig = tsEslint.config({ files: ['**/*.{js,ts}'] });
 

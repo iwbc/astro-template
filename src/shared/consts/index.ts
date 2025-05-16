@@ -1,1 +1,1 @@
-export { BREAKPOINTS, BREAKPOINT_KEYS } from './breakpoint';
+export { BREAKPOINTS, BREAKPOINT_KEYS, PRINT_MIN_WIDTH } from './breakpoint';

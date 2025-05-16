@@ -2,4 +2,6 @@
   @each $breakpoint, $value in breakpoint.$breakpoints {
     #{$breakpoint}: $value;
   }
+
+  printMinWidth: breakpoint.$print-min-width;
 }
