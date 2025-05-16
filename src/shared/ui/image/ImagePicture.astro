@@ -18,10 +18,10 @@ type Source = Pick<LocalImageProps, 'width' | 'height' | 'densities' | 'quality'
 };
 
 type Props = Img & {
-  sources?: Source | Source[];
+  sources: Source | Source[];
 };
 
-const { sources = [], ...img } = Astro.props;
+const { sources, ...img } = Astro.props;
 const sourcesArray = Array.isArray(sources) ? sources : [sources];
 sourcesArray.reverse();
 
