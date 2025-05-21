@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+// @ts-expect-error
 import htmlBeautifier from 'astro-html-beautifier';
 import icon from 'astro-icon';
 

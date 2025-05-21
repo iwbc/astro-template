@@ -5,6 +5,7 @@ export default {
     '\\.astro$': '@markuplint/astro-parser',
   },
   extends: ['markuplint:recommended'],
+  excludeFiles: ['dist/'],
   rules: {
     'heading-levels': false,
     'no-refer-to-non-existent-id': false,
