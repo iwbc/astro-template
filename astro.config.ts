@@ -35,6 +35,7 @@ export default defineConfig({
   compressHTML: false,
   scopedStyleStrategy: 'class',
   build: {
+    assets: 'assets',
     inlineStylesheets: 'never',
   },
   vite: {

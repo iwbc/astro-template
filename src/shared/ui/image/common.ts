@@ -7,7 +7,7 @@ export async function getImageMetadata(src: LocalImageProps['src'] | string) {
     const images = import.meta.glob<{ default: ImageMetadata }>('/src/**/*.{jpg,jpeg,png,gif,svg,webp,avif}');
     const resolvedSrc = '/src/' + src.replace(/^@\/|^\/src\/|^\//, '');
     if (!images[resolvedSrc]) {
-      throw new Error(`${resolvedSrc} is not found in the images folder.`);
+      throw new Error(`${resolvedSrc} is not found.`);
     }
     return (await images[resolvedSrc]()).default;
   } else if (!isImageMetadata(src)) {
