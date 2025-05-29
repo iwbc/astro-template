@@ -1,123 +1,168 @@
 // based on @acab/reset.css
-// https://github.com/mayank99/reset.css/releases/tag/v0.10.0
+// https://github.com/mayank99/reset.css/releases/tag/v0.11.0
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
 
-:where([hidden]:not([hidden='until-found'])) {
-  display: none !important;
-}
+  [hidden]:not([hidden='until-found']) {
+    display: none !important;
+  }
 
-:where(html) {
-  tab-size: 2;
-  text-size-adjust: none;
-}
+  :root {
+    scrollbar-gutter: stable;
+    line-height: 1.5;
+    tab-size: 2;
+    color-scheme: dark light;
+    text-size-adjust: none;
+    interpolate-size: allow-keywords;
+  }
 
-:where(body) {
-  font-family: system-ui, sans-serif;
-  line-height: 1.5;
-  overflow-wrap: anywhere;
-  -webkit-font-smoothing: antialiased;
-}
+  :root:has(:modal) {
+    overflow: hidden;
+  }
 
-:where(button) {
-  all: unset;
-}
+  @media (prefers-reduced-motion: no-preference) {
+    :root:focus-within {
+      scroll-behavior: smooth;
+    }
+  }
 
-:where(input, button, textarea, select) {
-  box-sizing: border-box;
-  font: inherit;
-  color: inherit;
-}
+  body {
+    font-family: system-ui, sans-serif;
+    line-height: inherit;
+    -webkit-font-smoothing: antialiased;
+  }
 
-:where(textarea) {
-  resize: vertical;
-  resize: block;
-}
+  button {
+    all: unset;
+  }
 
-:where(button, label, select, summary, [role='button'], [role='option']) {
-  cursor: pointer;
-}
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+    font-variation-settings: inherit;
+    font-feature-settings: inherit;
+    color: inherit;
+    word-spacing: inherit;
+    letter-spacing: inherit;
+  }
 
-:where(:disabled) {
-  cursor: not-allowed;
-}
+  textarea {
+    resize: vertical;
+    resize: block;
+  }
 
-:where(label:has(> input:disabled), label:has(+ input:disabled)) {
-  cursor: not-allowed;
-}
+  button,
+  label,
+  select,
+  summary,
+  [role='button'],
+  [role='option'] {
+    cursor: pointer;
+  }
 
-:where(a) {
-  color: inherit;
-  text-underline-offset: 0.2ex;
-}
+  :disabled,
+  label:has(> :disabled, + :disabled) {
+    cursor: not-allowed;
+  }
 
-:where(ul, ol) {
-  list-style: none;
-}
+  a {
+    color: inherit;
+    text-underline-offset: 0.2ex;
+  }
 
-:where(img, svg, video, canvas, audio, iframe, embed, object) {
-  display: block;
-}
+  ul,
+  ol {
+    list-style: none;
+  }
 
-:where(img, picture, svg, video) {
-  max-inline-size: 100%;
-  block-size: auto;
-}
+  img,
+  svg,
+  video,
+  canvas,
+  audio,
+  iframe,
+  embed,
+  object {
+    display: block;
+  }
 
-:where(hr) {
-  block-size: 0;
-  overflow: visible;
-  color: inherit;
-  border: none;
-  border-block-start: 1px solid;
-}
+  img,
+  picture,
+  svg,
+  video {
+    max-inline-size: 100%;
+    block-size: auto;
+  }
 
-:where(dialog) {
-  inset: unset;
-  max-width: unset;
-  max-height: unset;
-  background: none;
-  border: none;
-}
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    overflow-wrap: break-word;
+  }
 
-:where(dialog:not([open], [popover])) {
-  display: none !important;
-}
+  h1,
+  h2,
+  h3 {
+    line-height: calc(1em + 0.5rem);
+    text-wrap: balance;
+  }
 
-:where([popover]) {
-  inset: unset;
-  color: inherit;
-  background: none;
-  border: none;
-}
+  hr {
+    block-size: 0;
+    overflow: visible;
+    color: inherit;
+    border: none;
+    border-block-start: 1px solid;
+  }
 
-:where([popover]:not(:popover-open)) {
-  display: none !important;
-}
+  dialog,
+  [popover] {
+    inset: unset;
+    max-width: unset;
+    max-height: unset;
+    overflow: unset;
+    color: inherit;
+    background: none;
+    border: none;
+  }
 
-:where(:focus-visible) {
-  outline: 3px solid CanvasText;
-  outline-offset: 1px;
-  box-shadow: 0 0 0 5px Canvas;
-}
+  dialog:not([open], [popover]),
+  [popover]:not(:popover-open) {
+    display: none !important;
+  }
 
-:where(:focus-visible, :target) {
-  scroll-margin-block: 8vh;
-}
+  :focus-visible {
+    outline: 3px solid CanvasText;
+    outline-offset: 1px;
+    box-shadow: 0 0 0 5px Canvas;
+  }
 
-:where(.visually-hidden:not(:focus-within, :active)) {
-  position: absolute !important;
-  width: 1px !important;
-  height: 1px !important;
-  overflow: hidden !important;
-  white-space: nowrap !important;
-  user-select: none !important;
-  border: 0 !important;
-  clip-path: inset(50%) !important;
+  :focus-visible,
+  :target {
+    scroll-margin-block: 8vh;
+  }
+
+  .visually-hidden:not(:focus-within, :active) {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    user-select: none !important;
+    border: 0 !important;
+    clip-path: inset(50%) !important;
+  }
 }
