@@ -12,23 +12,23 @@ import ExampleHomeComponent from './ExampleHomeComponent.astro';
 
   <div>
     <h2>Image Component</h2>
-    <Image src="@/views/home/assets/images/sample-img.jpg" alt="alt" densities={[2]} />
+    <Image src="@/views/home/assets/sample-img.jpg" alt="alt" densities={[2]} />
   </div>
 
   <div>
     <h2>ImagePicutre Component</h2>
     <ImagePicture
-      src="@/views/home/assets/images/sample-picture-sm.jpg"
+      src="@/views/home/assets/sample-picture-sm.jpg"
       alt=""
       densities={[2]}
       sources={[
         {
-          src: '@/views/home/assets/images/sample-picture-nm.jpg',
+          src: '@/views/home/assets/sample-picture-nm.jpg',
           media: 'tab',
           densities: [2],
         },
         {
-          src: '@/views/home/assets/images/sample-picture-lg.jpg',
+          src: '@/views/home/assets/sample-picture-lg.jpg',
           media: '(min-width: 1024px)',
           densities: [2],
         },
@@ -38,7 +38,7 @@ import ExampleHomeComponent from './ExampleHomeComponent.astro';
 
   <div>
     <h2>ImageDefineVars Component（Define CSS Variables）</h2>
-    <ImageDefineVars images={[{ src: '@/views/home/assets/images/sample-img.jpg', name: 'sample-bg' }]} class="bg">
+    <ImageDefineVars images={[{ src: '@/views/home/assets/sample-img.jpg', name: 'sample-bg' }]} class="bg">
       <div>Content</div>
     </ImageDefineVars>
   </div>

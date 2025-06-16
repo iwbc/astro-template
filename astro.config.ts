@@ -11,7 +11,7 @@ export default defineConfig({
   },
   integrations: [
     icon({
-      iconDir: 'src/shared/assets/icons',
+      iconDir: 'src/app/icons',
       svgoOptions: {
         plugins: [
           'preset-default',
