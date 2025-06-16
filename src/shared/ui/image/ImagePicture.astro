@@ -6,7 +6,7 @@ import { getImage } from 'astro:assets';
 
 import { BREAKPOINT_KEYS, BREAKPOINTS, PRINT_MIN_WIDTH } from '@/shared/consts';
 
-import { getImageMetadata, getMaxDensity } from './common';
+import { getImageMetadata, getMaxDensity } from './utils';
 
 type Img = Omit<LocalImageProps, 'src'> & {
   src: LocalImageProps['src'] | string;

@@ -2,7 +2,7 @@
 import type { LocalImageProps } from 'astro:assets';
 import { Image as AstroImage } from 'astro:assets';
 
-import { getImageMetadata, getMaxDensity } from './common';
+import { getImageMetadata, getMaxDensity } from './utils';
 
 type Props = Omit<LocalImageProps, 'src'> & {
   src: LocalImageProps['src'] | string;
