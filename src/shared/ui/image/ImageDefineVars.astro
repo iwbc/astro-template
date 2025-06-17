@@ -1,44 +1,76 @@
 ---
+import path from 'node:path';
+
 import type { HTMLAttributes } from 'astro/types';
 import { getImage, type LocalImageProps } from 'astro:assets';
 
 import { getImageMetadata } from './utils';
 
+type Src = LocalImageProps['src'] | string;
+
 type Image = {
-  src: LocalImageProps['src'] | string;
+  src: Src;
   name: string;
 };
 
 type Props = Pick<LocalImageProps, 'quality'> &
   HTMLAttributes<'div'> & {
-    images: Image | Image[];
+    images: (Image | Src)[];
     tag?: keyof HTMLElementTagNameMap;
   };
 
 const { images, tag: TagName = 'div', quality = 'max', ...props } = Astro.props;
-const imagesArray = Array.isArray(images) ? images : [images];
 
 const results = await Promise.all(
-  imagesArray.map(async (image) => {
+  images.map(async (image) => {
+    let name: string;
+    let src: Src;
+    if (typeof image === 'object' && 'name' in image) {
+      src = image.src;
+      name = image.name;
+    } else if (typeof image === 'string') {
+      src = image;
+      name = createVarName(path.parse(image).name);
+    } else if (typeof image === 'object' && 'src' in image) {
+      src = image;
+      name = createVarName(path.parse(image.src).name);
+    } else {
+      src = image;
+      name = createVarName(path.parse((await image).default.src).name);
+    }
+
     return {
       image: await getImage({
-        src: await getImageMetadata(image.src),
+        src: await getImageMetadata(src),
         quality,
       }),
-      name: image.name,
+      name,
     };
   })
 );
 
 const style = results
   .map((result) => {
-    if (!/^[a-zA-Z0-9-_]+$/.test(result.name)) {
-      throw new Error(`Invalid name for CSS variable: ${result.name}`);
+    if (!/^[a-z0-9-]+$/.test(result.name)) {
+      throw new Error(`Invalid CSS Variable name "${result.name}". Only lowercase kebab-case names are allowed.`);
     }
 
-    return `--${result.name}: url(${result.image.src});`;
+    return `--${result.name}: url(${result.image.src}); --${result.name}-width: ${result.image.attributes.width}px; --${result.name}-height: ${result.image.attributes.height}px;`;
   })
   .join(' ');
+
+function createVarName(str: string) {
+  return (
+    'bg-' +
+    str
+      .replace(/[^a-zA-Z0-9]+/g, '-')
+      .replace(/([a-z])([A-Z])/g, '$1-$2')
+      .replace(/([A-Z]{2,})(?=[A-Z][a-z]|$)/g, (match) => match.toLowerCase())
+      .replace(/([A-Z])/g, (match) => match.toLowerCase())
+      .replace(/^-+|-+$/g, '')
+      .replace(/--+/g, '-')
+  );
+}
 ---
 
 <TagName {...props} style={style}>

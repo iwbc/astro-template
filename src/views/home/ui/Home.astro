@@ -38,7 +38,9 @@ import ExampleHomeComponent from './ExampleHomeComponent.astro';
 
   <div>
     <h2>ImageDefineVars Component（Define CSS Variables）</h2>
-    <ImageDefineVars images={[{ src: '@/views/home/assets/sample-img.jpg', name: 'sample-bg' }]} class="bg">
+    <ImageDefineVars
+      images={['@/views/home/assets/sample-img.jpg', { src: '@/views/home/assets/sample-img.jpg', name: 'sample-bg' }]}
+      class="bg">
       <div>Content</div>
     </ImageDefineVars>
   </div>
@@ -74,5 +76,6 @@ import ExampleHomeComponent from './ExampleHomeComponent.astro';
     color: #fff;
     // ImageDefineVarsコンポーネントで読み込んだ画像はCSS変数として使用可能になる
     background: var(--sample-bg);
+    background-size: var(--sample-bg-width) var(--sample-bg-height);
   }
 </style>
