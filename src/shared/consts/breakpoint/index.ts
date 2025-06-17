@@ -1,4 +1,4 @@
-import styles from './breakpoint.module.scss';
+import styles from './index.module.scss';
 
 type Breakpoint = Record<string, string>;
 
