@@ -5,8 +5,7 @@
     "esbenp.prettier-vscode",
     "stylelint.vscode-stylelint",
     "astro-build.astro-vscode",
-    "EditorConfig.EditorConfig",
-    "yusukehirao.vscode-markuplint"
+    "EditorConfig.EditorConfig"
   ],
   "unwantedRecommendations": []
 }
