@@ -31,3 +31,13 @@ export function getMaxDensity(densities: LocalImageProps['densities']) {
 
   return Math.max(...densitiesAsNumbers);
 }
+
+export async function isSvgImage(src: LocalImageProps['src'] | string) {
+  if (typeof src === 'string') {
+    return src.endsWith('.svg');
+  } else if (typeof src === 'object' && 'src' in src) {
+    return src.src.endsWith('.svg');
+  } else {
+    return (await src).default.src.endsWith('.svg');
+  }
+}

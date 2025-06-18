@@ -1,33 +1,36 @@
 ---
 import path from 'node:path';
 
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLAttributes, HTMLTag } from 'astro/types';
 import { getImage, type LocalImageProps } from 'astro:assets';
 
-import { getImageMetadata } from './utils';
+import { getImageMetadata, getMaxDensity, isSvgImage } from './utils';
 
 type Src = LocalImageProps['src'] | string;
 
 type Image = {
   src: Src;
   name: string;
+  densities?: LocalImageProps['densities'];
 };
 
-type Props = Pick<LocalImageProps, 'quality'> &
-  HTMLAttributes<'div'> & {
+type Props<T extends HTMLTag = 'div'> = Pick<LocalImageProps, 'quality'> &
+  HTMLAttributes<T> & {
     images: (Image | Src)[];
-    tag?: keyof HTMLElementTagNameMap;
+    as?: T;
   };
 
-const { images, tag: TagName = 'div', quality = 'max', ...props } = Astro.props;
+const { images, as: Tag = 'div', quality = 'max', ...props } = Astro.props;
 
 const results = await Promise.all(
   images.map(async (image) => {
-    let name: string;
     let src: Src;
+    let name: string;
+    let densities: LocalImageProps['densities'] | undefined;
     if (typeof image === 'object' && 'name' in image) {
       src = image.src;
       name = image.name;
+      densities = image.densities;
     } else if (typeof image === 'string') {
       src = image;
       name = createVarName(path.parse(image).name);
@@ -39,9 +42,15 @@ const results = await Promise.all(
       name = createVarName(path.parse((await image).default.src).name);
     }
 
+    const isSvg = await isSvgImage(src);
+    const imageMetadata = await getImageMetadata(src);
+    densities = isSvg ? undefined : (densities ?? [1, 2]);
+
     return {
       image: await getImage({
-        src: await getImageMetadata(src),
+        src: imageMetadata,
+        width: Math.floor(imageMetadata.width / getMaxDensity(densities)),
+        densities,
         quality,
       }),
       name,
@@ -55,24 +64,37 @@ const style = results
       throw new Error(`Invalid CSS Variable name "${result.name}". Only lowercase kebab-case names are allowed.`);
     }
 
-    return `--${result.name}: url(${result.image.src}); --${result.name}-width: ${result.image.attributes.width}px; --${result.name}-height: ${result.image.attributes.height}px;`;
+    const vars = {
+      [`--${result.name}-width`]: `${result.image.attributes.width}px`,
+      [`--${result.name}-height`]: `${result.image.attributes.height}px`,
+    };
+
+    if (result.image.srcSet.values.length) {
+      vars[`--${result.name}`] = `url(${result.image.srcSet.values[result.image.srcSet.values.length - 1].url})`;
+      result.image.srcSet.values.map((value) => {
+        vars[`--${result.name}-${value.descriptor}`] = `url(${value.url})`;
+      });
+    } else {
+      vars[`--${result.name}`] = `url(${result.image.src})`;
+    }
+
+    return Object.entries(vars)
+      .map(([key, value]) => `${key}: ${value};`)
+      .join(' ');
   })
   .join(' ');
 
 function createVarName(str: string) {
-  return (
-    'bg-' +
-    str
-      .replace(/[^a-zA-Z0-9]+/g, '-')
-      .replace(/([a-z])([A-Z])/g, '$1-$2')
-      .replace(/([A-Z]{2,})(?=[A-Z][a-z]|$)/g, (match) => match.toLowerCase())
-      .replace(/([A-Z])/g, (match) => match.toLowerCase())
-      .replace(/^-+|-+$/g, '')
-      .replace(/--+/g, '-')
-  );
+  return str
+    .replace(/[^a-zA-Z0-9]+/g, '-')
+    .replace(/([a-z])([A-Z])/g, '$1-$2')
+    .replace(/([A-Z]{2,})(?=[A-Z][a-z]|$)/g, (match) => match.toLowerCase())
+    .replace(/([A-Z])/g, (match) => match.toLowerCase())
+    .replace(/^-+|-+$/g, '')
+    .replace(/--+/g, '-');
 }
 ---
 
-<TagName {...props} style={style}>
+<Tag {...props} style={style}>
   <slot />
-</TagName>
+</Tag>

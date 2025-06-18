@@ -8,41 +8,61 @@ import ExampleHomeComponent from './ExampleHomeComponent.astro';
 ---
 
 <DefaultLayout>
+  <link rel="stylesheet" href="https://unpkg.com/marx-css/css/marx.min.css" />
+
   <h1>index.astro</h1>
 
   <div>
     <h2>Image Component</h2>
-    <Image src="@/views/home/assets/sample-img.jpg" alt="alt" densities={[2]} />
+    <Image src="@/views/home/assets/sample-img.jpg" />
+    <pre>{`<Image src="@/views/home/assets/sample-img.jpg" />`}</pre>
   </div>
 
   <div>
     <h2>ImagePicutre Component</h2>
     <ImagePicture
       src="@/views/home/assets/sample-picture-sm.jpg"
-      alt=""
-      densities={[2]}
       sources={[
         {
           src: '@/views/home/assets/sample-picture-nm.jpg',
           media: 'tab',
-          densities: [2],
         },
         {
           src: '@/views/home/assets/sample-picture-lg.jpg',
           media: '(min-width: 1024px)',
-          densities: [2],
         },
       ]}
     />
+    <pre>{
+`<ImagePicture
+  src="@/views/home/assets/sample-picture-sm.jpg"
+  sources={[
+    {
+      src: '@/views/home/assets/sample-picture-nm.jpg',
+      media: 'tab',
+    },
+    {
+      src: '@/views/home/assets/sample-picture-lg.jpg',
+      media: '(min-width: 1024px)',
+    },
+  ]}
+/>`
+    }</pre>
   </div>
 
   <div>
     <h2>ImageDefineVars Component（Define CSS Variables）</h2>
     <ImageDefineVars
-      images={['@/views/home/assets/sample-img.jpg', { src: '@/views/home/assets/sample-img.jpg', name: 'sample-bg' }]}
-      class="bg">
-      <div>Content</div>
-    </ImageDefineVars>
+      images={['@/views/home/assets/sample-img.jpg', { src: '@/views/home/assets/sample-img.jpg', name: 'bg' }]}
+      class="bg"
+    />
+    <pre>{
+`<ImageDefineVars images={['@/views/home/assets/sample-img.jpg' />
+
+or
+
+<ImageDefineVars images={[{ src: '@/views/home/assets/sample-img.jpg', name: 'bg' }]} />`
+    }</pre>
   </div>
 
   <div>
@@ -69,13 +89,20 @@ import ExampleHomeComponent from './ExampleHomeComponent.astro';
   }
 
   .bg {
+    // ImageDefineVarsコンポーネントで読み込んだ画像はCSS変数として使用可能になる
+    // nameプロパティを指定した場合はその名前で変数が定義され、指定しない場合はファイル名から自動生成される（ケバブケース）
     display: grid;
     place-items: center;
-    width: 200px;
-    height: 200px;
+    width: var(--bg-width);
+    height: var(--bg-height);
     color: #fff;
-    // ImageDefineVarsコンポーネントで読み込んだ画像はCSS変数として使用可能になる
-    background: var(--sample-bg);
-    background-size: var(--sample-bg-width) var(--sample-bg-height);
+    background-image: var(--bg-1x);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: var(--bg-width) var(--bg-height);
+
+    @media (resolution >= 2x) {
+      background-image: var(--bg); // or var(--bg-2x)
+    }
   }
 </style>

@@ -2,14 +2,18 @@
 import type { LocalImageProps } from 'astro:assets';
 import { Image as AstroImage } from 'astro:assets';
 
-import { getImageMetadata, getMaxDensity } from './utils';
+import { getImageMetadata, getMaxDensity, isSvgImage } from './utils';
 
-type Props = Omit<LocalImageProps, 'src'> & {
+type Props = Omit<LocalImageProps, 'src' | 'alt'> & {
   src: LocalImageProps['src'] | string;
+  alt?: string;
 };
 
 const props = Astro.props;
+const isSvg = await isSvgImage(props.src);
 
+props.alt = props.alt ?? '';
+props.densities = isSvg ? undefined : (props.densities ?? [1, 2]);
 props.src = await getImageMetadata(props.src);
 props.width = Math.floor(props.src.width / getMaxDensity(props.densities));
 props.quality = props.quality ?? 'max';
