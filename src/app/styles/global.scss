@@ -1,10 +1,11 @@
-@use './partials/define-layers';
+@use './partials/layers';
 @use './partials/reset';
 
 :root {
   --font-family: 'Noto Sans JP', 'Hiragino Sans', 'メイリオ', sans-serif;
   --leading-trim: calc((1em - 1lh) / 2);
 
+  @include breakpoint.cssvars;
   @include color.cssvars;
 }
 

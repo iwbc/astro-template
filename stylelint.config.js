@@ -12,5 +12,7 @@ export default {
     'selector-pseudo-class-no-unknown': [true, { ignorePseudoClasses: ['global', 'export'] }],
     // :exportセレクタ内では不明なプロパティを許容する
     'property-no-unknown': [true, { ignoreSelectors: [':export'] }],
+    // iOS Safariはtext-size-adjustにベンダープレフィックスが必要
+    'property-no-vendor-prefix': [true, { ignoreProperties: ['text-size-adjust'] }],
   },
 };
