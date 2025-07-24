@@ -24,6 +24,7 @@
     "astro": "^5.11.0",
     "astro-html-beautifier": "^1.0.4",
     "astro-icon": "^1.1.5",
+    "astro-seo": "^0.8.4",
     "ismobilejs": "^1.1.1",
     "kiso.css": "^1.2.1",
     "sass-embedded": "^1.89.2",
