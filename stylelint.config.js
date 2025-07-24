@@ -14,5 +14,7 @@ export default {
     'property-no-unknown': [true, { ignoreSelectors: [':export'] }],
     // iOS Safariはtext-size-adjustにベンダープレフィックスが必要
     'property-no-vendor-prefix': [true, { ignoreProperties: ['text-size-adjust'] }],
+    // コンポーネントのルートにはコンポーネント名をクラス名として使用したいので、セレクタのクラス名パターンを無効化
+    'selector-class-pattern': null,
   },
 };

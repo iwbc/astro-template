@@ -1,0 +1,11 @@
+{
+  "Component Script": {
+    "prefix": "astro",
+    "body": ["---", "type Props = {};", "", "const props = Astro.props;", "---"],
+  },
+
+  "Style Tag": {
+    "prefix": "astyle",
+    "body": ["<style lang=\"scss\">", "/// style", "</style>"],
+  },
+}

@@ -13,4 +13,9 @@
     "prefix": "hover",
     "body": ["@include hover.this {", "  $0", "}"],
   },
+
+  "font-size rem": {
+    "prefix": "fzr",
+    "body": ["font-size: unit.rem(${1:16px});"],
+  },
 }
