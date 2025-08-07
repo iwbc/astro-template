@@ -14,6 +14,9 @@
 @layer base {
   :root {
     -webkit-tap-highlight-color: rgb(0 0 0 / 5%);
+    -webkit-font-smoothing: antialiased;
+    scroll-padding-top: 0;
+    scroll-behavior: smooth;
   }
 
   body {
@@ -28,6 +31,10 @@
   button {
     padding: 0;
     border: 0;
+  }
+
+  svg {
+    overflow: visible;
   }
 
   .visually-hidden {

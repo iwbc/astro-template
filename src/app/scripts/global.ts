@@ -27,5 +27,3 @@ setViewport();
 setScrollbarWidthCSSProp();
 window.addEventListener('resize', debounce(100, setViewport));
 window.addEventListener('resize', debounce(100, setScrollbarWidthCSSProp));
-
-document.documentElement.style.scrollBehavior = 'smooth';
