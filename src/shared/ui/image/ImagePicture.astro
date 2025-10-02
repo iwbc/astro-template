@@ -13,7 +13,7 @@ type Image = Omit<LocalImageProps, 'src' | 'alt'> & {
   alt?: string;
 };
 
-type Source = Pick<LocalImageProps, 'width' | 'height' | 'densities' | 'quality'> & {
+type Source = Pick<LocalImageProps, 'width' | 'height' | 'densities' | 'quality' | 'format'> & {
   src: LocalImageProps['src'] | string;
   media: string;
 };
