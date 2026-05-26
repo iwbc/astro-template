@@ -13,10 +13,10 @@
 
 @layer base {
   :root {
+    scroll-behavior: smooth;
+    scroll-padding-top: 0;
     -webkit-tap-highlight-color: rgb(0 0 0 / 5%);
     -webkit-font-smoothing: antialiased;
-    scroll-padding-top: 0;
-    scroll-behavior: smooth;
   }
 
   body {
@@ -37,15 +37,24 @@
     overflow: visible;
   }
 
-  .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    white-space: nowrap;
-    border-width: 0;
-    clip: rect(0, 0, 0, 0);
+  .visually-hidden,
+  .visually-hidden-focusable:not(:focus, :focus-within) {
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+    /* stylelint-disable-next-line property-no-deprecated */
+    clip: rect(0, 0, 0, 0) !important;
+
+    &:not(caption) {
+      position: absolute !important;
+    }
+
+    * {
+      overflow: hidden !important;
+    }
   }
 }
