@@ -44,7 +44,6 @@ export default defineConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          api: 'modern-compiler',
           additionalData: `
             @use "@/app/styles/utils/vars.scss";
             @use "@/app/styles/utils/breakpoint.scss";

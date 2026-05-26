@@ -1,18 +1,19 @@
 // @ts-check
 
 import eslint from '@eslint/js';
-import prettier from 'eslint-config-prettier';
+import { defineConfig } from 'eslint/config';
+import prettier from 'eslint-config-prettier/flat';
 import astroPlugin from 'eslint-plugin-astro';
 import importXPlugin from 'eslint-plugin-import-x';
 import unusedImportsPlugin from 'eslint-plugin-unused-imports';
 import globals from 'globals';
 import tsEslint from 'typescript-eslint';
 
-const ignoresConfig = tsEslint.config({ ignores: ['dist/', '.astro/', 'src/env.d.ts'] });
+const ignoresConfig = defineConfig({ ignores: ['dist/', '.astro/', 'src/env.d.ts'] });
 
-const filesConfig = tsEslint.config({ files: ['**/*.{js,ts}'] });
+const filesConfig = defineConfig({ files: ['**/*.{js,ts}'] });
 
-const languageOptionsConfig = tsEslint.config({
+const languageOptionsConfig = defineConfig({
   languageOptions: {
     parser: tsEslint.parser,
     ecmaVersion: 'latest',
@@ -21,7 +22,7 @@ const languageOptionsConfig = tsEslint.config({
   },
 });
 
-const unusedImportsPluginConfig = tsEslint.config({
+const unusedImportsPluginConfig = defineConfig({
   plugins: {
     'unused-imports': unusedImportsPlugin,
   },
@@ -40,7 +41,7 @@ const unusedImportsPluginConfig = tsEslint.config({
   },
 });
 
-const importXPluginConfig = tsEslint.config(
+const importXPluginConfig = defineConfig([
   importXPlugin.flatConfigs.recommended,
   importXPlugin.flatConfigs.typescript,
   {
@@ -71,19 +72,22 @@ const importXPluginConfig = tsEslint.config(
       },
     },
   },
-);
+]);
 
-const astroPluginConfig = tsEslint.config(...astroPlugin.configs.recommended, {
-  rules: {},
-});
+const astroPluginConfig = defineConfig([
+  ...astroPlugin.configs.recommended,
+  {
+    rules: {},
+  },
+]);
 
-export default tsEslint.config(
-  ...ignoresConfig,
-  ...filesConfig,
-  ...languageOptionsConfig,
+export default defineConfig(
+  ignoresConfig,
+  filesConfig,
+  languageOptionsConfig,
   eslint.configs.recommended,
   ...tsEslint.configs.strict,
-  ...unusedImportsPluginConfig,
+  unusedImportsPluginConfig,
   ...importXPluginConfig,
   ...astroPluginConfig,
   prettier,

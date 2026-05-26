@@ -3,7 +3,7 @@ import { debounce } from 'throttle-debounce';
 
 function setViewport() {
   const screenWidth = window.screen.width;
-  let viewport = 'width=device-width';
+  let viewport: string;
 
   if (isMobile().phone) {
     if (screenWidth < 375) {
