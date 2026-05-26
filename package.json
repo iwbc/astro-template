@@ -2,11 +2,11 @@
   "name": "astro-template",
   "type": "module",
   "engines": {
-    "node": "^22.11.0",
+    "node": "^24.0.0",
     "npm": "please-use-pnpm",
     "yarn": "please-use-pnpm"
   },
-  "packageManager": "pnpm@10.33.0",
+  "packageManager": "pnpm@11.3.0",
   "version": "2.4.0",
   "scripts": {
     "dev": "astro dev",
@@ -21,9 +21,9 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.4",
+    "@astrojs/check": "^0.9.9",
     "@iwbc/sass-utils": "^1.4.0",
-    "astro": "^5.11.0",
+    "astro": "^6.3.7",
     "astro-html-beautifier": "^1.0.4",
     "astro-icon": "^1.1.5",
     "astro-seo": "^0.8.4",
