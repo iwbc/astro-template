@@ -1,6 +1,6 @@
 {
   "name": "astro-template",
-  "version": "2.4.0",
+  "version": "3.0.0",
   "dependencies": {
     "@astrojs/check": "^0.9.9",
     "@iwbc/sass-utils": "^2.0.1",
