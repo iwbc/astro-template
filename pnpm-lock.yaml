@@ -45,6 +45,9 @@ importers:
       '@types/throttle-debounce':
         specifier: ^5.0.2
         version: 5.0.2
+      '@typescript-eslint/parser':
+        specifier: ^8.59.4
+        version: 8.59.4(eslint@10.4.0)(typescript@5.9.3)
       eslint:
         specifier: ^10.4.0
         version: 10.4.0
