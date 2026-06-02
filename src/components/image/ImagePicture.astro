@@ -4,7 +4,7 @@ import type { HTMLAttributes } from 'astro/types';
 import type { LocalImageProps } from 'astro:assets';
 import { getImage } from 'astro:assets';
 
-import { BREAKPOINT_KEYS, BREAKPOINTS, PRINT_MIN_WIDTH } from '@/shared/consts/breakpoint';
+import { BREAKPOINT_KEYS, BREAKPOINTS, PRINT_MIN_WIDTH } from '@/app/consts/breakpoint';
 
 import { getImageMetadata, getMaxDensity, isSvgImage } from './utils';
 
@@ -78,7 +78,7 @@ const sourceImages = await Promise.all(
       height: image.attributes.height,
       media: attrs.media,
     };
-  })
+  }),
 );
 ---
 

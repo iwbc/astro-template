@@ -2,7 +2,7 @@
 
 ## Requirements
 
-- Node.js v22.x
+- Node.js v24.x
 
 ## Commands
 
