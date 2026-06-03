@@ -84,6 +84,9 @@ importers:
       sass-embedded:
         specifier: ^1.99.0
         version: 1.99.0
+      sharp:
+        specifier: ^0.34.5
+        version: 0.34.5
       stylelint:
         specifier: ^17.11.1
         version: 17.11.1(typescript@5.9.3)
@@ -4436,8 +4439,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@img/colour@1.1.0':
-    optional: true
+  '@img/colour@1.1.0': {}
 
   '@img/sharp-darwin-arm64@0.34.5':
     optionalDependencies:
@@ -5551,8 +5553,7 @@ snapshots:
 
   destr@2.0.5: {}
 
-  detect-libc@2.1.2:
-    optional: true
+  detect-libc@2.1.2: {}
 
   devalue@5.8.1: {}
 
@@ -7624,7 +7625,6 @@ snapshots:
       '@img/sharp-win32-arm64': 0.34.5
       '@img/sharp-win32-ia32': 0.34.5
       '@img/sharp-win32-x64': 0.34.5
-    optional: true
 
   shebang-command@1.2.0:
     dependencies:
