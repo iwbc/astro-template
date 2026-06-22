@@ -16,5 +16,12 @@ export default {
     'property-no-vendor-prefix': [true, { ignoreProperties: ['text-size-adjust'] }],
     // コンポーネントのルートにはコンポーネント名をクラス名として使用したいので、セレクタのクラス名パターンを無効化
     'selector-class-pattern': null,
+    // カスタムプロパティの先頭にアンダースコア（0〜1個）を許容する
+    'custom-property-pattern': [
+      '^(_?)([a-z][a-z0-9]*)(-[a-z0-9]+)*$',
+      {
+        message: 'Expected custom property name to be kebab-case',
+      },
+    ],
   },
 };
