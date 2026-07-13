@@ -12,15 +12,24 @@ export default {
     'selector-pseudo-class-no-unknown': [true, { ignorePseudoClasses: ['global', 'export'] }],
     // :exportセレクタ内では不明なプロパティを許容する
     'property-no-unknown': [true, { ignoreSelectors: [':export'] }],
-    // iOS Safariはtext-size-adjustにベンダープレフィックスが必要
-    'property-no-vendor-prefix': [true, { ignoreProperties: ['text-size-adjust'] }],
-    // コンポーネントのルートにはコンポーネント名をクラス名として使用したいので、セレクタのクラス名パターンを無効化
-    'selector-class-pattern': null,
-    // カスタムプロパティの先頭にアンダースコア（0〜1個）を許容する
+    // クラス名はkebab-caseまたはPascalCaseを使用し、修飾子がある場合は--で区切りkebab-caseを使用する
+    'selector-class-pattern': [
+      '^([a-z][a-z0-9]*(-[a-z0-9]+)*|[A-Z][a-zA-Z0-9]*)(--[a-z][a-z0-9]*(-[a-z0-9]+)*)?$',
+      {
+        message: 'Expected class name to be kebab-case or PascalCase, with modifiers separated by "--" in kebab-case',
+      },
+    ],
+    // デフォルトのルールに先頭にアンダースコアを許容する
     'custom-property-pattern': [
       '^(_?)([a-z][a-z0-9]*)(-[a-z0-9]+)*$',
       {
         message: 'Expected custom property name to be kebab-case',
+      },
+    ],
+    'keyframes-name-pattern': [
+      '^(_?)([a-z][a-z0-9]*)(-[a-z0-9]+)*$',
+      {
+        message: 'Expected keyframes name to be kebab-case',
       },
     ],
   },
