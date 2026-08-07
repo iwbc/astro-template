@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "playwright-chrome": {
+      "command": "pnpm",
+      "args": [
+        "dlx",
+        "@playwright/mcp@latest",
+        "--browser",
+        "chrome",
+        "--isolated",
+        "--output-dir",
+        ".claude/tmp/playwright-chrome"
+      ]
+    }
+  }
+}

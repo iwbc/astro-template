@@ -9,7 +9,7 @@ import unusedImportsPlugin from 'eslint-plugin-unused-imports';
 import globals from 'globals';
 import tsEslint from 'typescript-eslint';
 
-const ignoresConfig = defineConfig({ ignores: ['dist/', '.astro/', 'src/env.d.ts'] });
+const ignoresConfig = defineConfig({ ignores: ['dist/', '.astro/', 'src/env.d.ts', '.claude/'] });
 
 const filesConfig = defineConfig({ files: ['**/*.{js,ts}'] });
 

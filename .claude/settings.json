@@ -1,0 +1,18 @@
+{
+  "plansDirectory": "./.claude/tmp/plans",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "{ f=$(jq -r \"(.tool_response.filePath // .tool_input.file_path) // empty\"); [ -n \"$f\" ] && [ -f \"$f\" ] || exit 0; R=\"${CLAUDE_PROJECT_DIR:-$PWD}\"; case \"$f\" in \"$R\"/*) ;; *) exit 0;; esac; case \"$f\" in *node_modules/*) exit 0;; esac; B=\"$R/node_modules/.bin\"; case \"$f\" in *.js|*.mjs|*.cjs|*.ts|*.tsx|*.astro) \"$B/eslint\" --fix --no-warn-ignored \"$f\";; esac; case \"$f\" in *.css|*.scss|*.astro) \"$B/stylelint\" --fix --allow-empty-input \"$f\";; esac; \"$B/prettier\" --write --ignore-unknown --log-level warn \"$f\"; } 2>/dev/null || true",
+            "timeout": 60,
+            "statusMessage": "lint --fix と Prettier で整形中..."
+          }
+        ]
+      }
+    ]
+  }
+}
