@@ -1,3 +1,5 @@
+import { fileURLToPath } from 'node:url';
+
 import { defineConfig } from 'astro/config';
 import htmlBeautifier from 'astro-html-beautifier';
 import icon from 'astro-icon';
@@ -82,14 +84,15 @@ export default defineConfig({
     css: {
       preprocessorOptions: {
         scss: {
+          loadPaths: [fileURLToPath(new URL('./src', import.meta.url))],
           additionalData: `
-            @use "@/app/styles/utils/vars.scss";
-            @use "@/app/styles/utils/breakpoint.scss";
-            @use "@/app/styles/utils/color.scss";
-            @use "@/app/styles/utils/easing.scss";
-            @use "@/app/styles/utils/hover.scss";
-            @use "@/app/styles/utils/unit.scss";
-            @use "@/app/styles/utils/z.scss";
+            @use "app/styles/utils/vars.scss";
+            @use "app/styles/utils/breakpoint.scss";
+            @use "app/styles/utils/color.scss";
+            @use "app/styles/utils/easing.scss";
+            @use "app/styles/utils/hover.scss";
+            @use "app/styles/utils/unit.scss";
+            @use "app/styles/utils/z.scss";
           `,
         },
       },

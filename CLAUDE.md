@@ -43,7 +43,7 @@ src/app/       アプリ全体の基盤（styles / scripts / consts / icons）
 
 配置の判断基準は「どこから使われるか」。単一ビュー専用なら `views/<name>/components/`、横断なら `components/`。
 
-パスエイリアスは `@/*` → `src/*`。
+パスエイリアスは `@/*` → `src/*`（`tsconfig.json` の `paths`）。これは TypeScript / JavaScript の解決にのみ効き、SCSS では使えない。SCSS からのパス参照は `astro.config.ts` の `vite.css.preprocessorOptions.scss.loadPaths` が `src` を解決ルートに加えているので、`@use "app/styles/utils/color.scss"` のように `src` 起点で書く。
 
 ## SCSS の構造
 
