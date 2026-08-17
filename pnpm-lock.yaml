@@ -211,8 +211,8 @@ importers:
         specifier: ^0.9.10
         version: 0.9.10(prettier-plugin-astro@0.14.1)(prettier@3.9.6)(typescript@5.9.3)
       '@iwbc/sass-utils':
-        specifier: ^2.0.1
-        version: 2.0.1(sass-embedded@1.100.0)(sass-true@10.1.0(sass-embedded@1.100.0)(sass@1.100.0))
+        specifier: ^3.0.1
+        version: 3.0.1(sass-embedded@1.100.0)(sass-true@10.1.0(sass-embedded@1.100.0)(sass@1.100.0))
       astro:
         specifier: ^7.2.0
         version: 7.2.0(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@25.9.1)(sass-embedded@1.100.0)(sass@1.100.0)(yaml@2.9.0)
@@ -1014,8 +1014,8 @@ packages:
     resolution: {integrity: sha512-wgm9Ehl2jpeqP3zw/7mo3kRHFp5MEDhqAdwy1fTGkHAwnkGOVsgpvQhL8B5n1qlb01jV3n/bI0ZfZp5lWA1k4w==}
     engines: {node: '>=18.0.0'}
 
-  '@iwbc/sass-utils@2.0.1':
-    resolution: {integrity: sha512-BrTZl7ziSK/7acuDkmRcHrUg+6qpPiFAwsn2qniweDWIOP9o73BXymc7jAthCXpvg1PDxmEL8k5GmplGaXaVjg==}
+  '@iwbc/sass-utils@3.0.1':
+    resolution: {integrity: sha512-j4gEFZfYNM6qr3EGVL9D3gmjsBp7I2pDy2PLMp8cicArQ/sVdEHlTy7Z/OXbUqp2kVGKonTXdY3CD5LEOWdj+w==}
     engines: {node: ^24.0.0, npm: please-use-pnpm, yarn: please-use-pnpm}
     peerDependencies:
       sass-embedded: ^1.99.0
@@ -2488,9 +2488,6 @@ packages:
   ignore@7.0.6:
     resolution: {integrity: sha512-BAg6QkE8W+TuQLrrw0Ugr7HegXduRuuj8/ti2kSOc+jz1dmx8/WNcjr6XGnq5YpDWxFwwaavqD0+jIUOKelTsw==}
     engines: {node: '>= 4'}
-
-  immutable@5.1.5:
-    resolution: {integrity: sha512-t7xcm2siw+hlUM68I+UEOK+z84RzmN59as9DZ7P1l0994DKUWV7UXBMQZVxaoMSRQ+PBZbHCOoBt7a2wxOMt+A==}
 
   immutable@5.1.9:
     resolution: {integrity: sha512-m8nVez3rwrgmWxtLMt1ZYXB2Lv7OKYn/disyxAlSDYAlKSlFoPPfIAmAM/M5xqL4m4C/wAPw7S2/CNaUii1Hxg==}
@@ -4954,7 +4951,7 @@ snapshots:
     dependencies:
       minipass: 7.1.3
 
-  '@iwbc/sass-utils@2.0.1(sass-embedded@1.100.0)(sass-true@10.1.0(sass-embedded@1.100.0)(sass@1.100.0))':
+  '@iwbc/sass-utils@3.0.1(sass-embedded@1.100.0)(sass-true@10.1.0(sass-embedded@1.100.0)(sass@1.100.0))':
     dependencies:
       sass-embedded: 1.100.0
       sass-true: 10.1.0(sass-embedded@1.100.0)(sass@1.100.0)
@@ -6588,9 +6585,6 @@ snapshots:
 
   ignore@7.0.6: {}
 
-  immutable@5.1.5:
-    optional: true
-
   immutable@5.1.9: {}
 
   import-fresh@3.3.1:
@@ -7517,7 +7511,7 @@ snapshots:
   sass@1.100.0:
     dependencies:
       chokidar: 5.0.0
-      immutable: 5.1.5
+      immutable: 5.1.9
       source-map-js: 1.2.1
     optionalDependencies:
       '@parcel/watcher': 2.5.6

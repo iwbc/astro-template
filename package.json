@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",
-    "@iwbc/sass-utils": "^2.0.1",
+    "@iwbc/sass-utils": "^3.0.1",
     "astro": "^7.2.0",
     "astro-html-beautifier": "^1.0.5",
     "astro-icon": "^1.1.5",
