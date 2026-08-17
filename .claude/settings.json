@@ -2,6 +2,30 @@
   "includeCoAuthoredBy": false,
   "plansDirectory": "./.claude/tmp/plans",
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "f=$(jq -r \"(.tool_input.file_path // empty)\"); case \"$f\" in */pnpm-lock.yaml|pnpm-lock.yaml) printf 'pnpm-lock.yaml は直接編集しない。依存の変更は pnpm add / pnpm update / pnpm install 経由で行うこと。\\n' >&2; exit 2;; esac; exit 0",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ \"$(jq -r '.stop_hook_active // false')\" = \"true\" ]; then exit 0; fi; R=\"${CLAUDE_PROJECT_DIR:-$PWD}\"; A=\"$R/node_modules/.bin/astro\"; [ -x \"$A\" ] || exit 0; O=$(cd \"$R\" && \"$A\" check 2>&1) || { printf '%s\\n' \"$O\" >&2; exit 2; }; exit 0",
+            "timeout": 120,
+            "statusMessage": "astro check で型を検証中..."
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Write|Edit",
