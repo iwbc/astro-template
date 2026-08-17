@@ -5,9 +5,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      // This is needed to resolve the types for astro-html-beautifier 1.0.4
-      "astro-html-beautifier": ["node_modules/astro-html-beautifier/dist/index.d.ts"]
+      "@/*": ["src/*"]
     }
   }
 }

@@ -54,10 +54,10 @@ pnpm build      # ビルド
 
 ### 5. 既知の破損箇所を確認する
 
-**Astro のバージョンを上げた場合は必ず確認する。** どちらも Astro の内部実装に依存しており、マイナー更新でも壊れうる。`pnpm check` が通っていても目視で確認すること。
+**Astro のバージョンを上げた場合は必ず確認する。** Astro の内部実装に依存しており、マイナー更新でも壊れうる。`pnpm check` が通っていても目視で確認すること。
 
 - `src/components/image/utils.ts` — `node_modules/astro/dist/assets/types` から `isImageMetadata` を直接 import している。パスが変わっていないか、公開 API に昇格していないかを見る
-- `tsconfig.json` の `paths` — `astro-html-beautifier` の型解決の回避策。本体側で型定義が同梱されたら不要になる
+- `astro.config.ts` の `vite.css.preprocessorOptions.scss.loadPaths` — 全 SCSS ブロックへ注入するユーティリティの解決を支えている。Vite のメジャー更新で解決経路が変わりうるので、ビルドが SCSS の import エラーで落ちたらここを疑う
 
 `@iwbc/sass-utils` を上げた場合は、`src/app/styles/utils/*.scss` の `@forward ... with (...)` に渡している変数名が変わっていないかを確認する。
 

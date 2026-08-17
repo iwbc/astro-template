@@ -126,7 +126,4 @@ lint が機械的に弾くもの:
 - `minimumReleaseAge: 10080`（7日）— リリース直後のパッケージはインストールできない
 - `allowBuilds` — postinstall スクリプトを走らせるパッケージは明示的に許可が必要。ネイティブバイナリを含むパッケージ（sharp 等）を追加したらここに追記する
 
-Astro をアップグレードしたら次の2箇所を確認する。どちらも Astro の内部実装に依存しており、マイナー更新でも壊れうる。
-
-- `src/components/image/utils.ts` の `node_modules/astro/dist/assets/types` からの `isImageMetadata` の import
-- `tsconfig.json` の `paths` にある `astro-html-beautifier` の型解決の回避策
+Astro をアップグレードしたら `src/components/image/utils.ts` を確認する。`node_modules/astro/dist/assets/types` から `isImageMetadata` を直接 import しており、Astro の内部実装に依存しているためマイナー更新でも壊れうる。
