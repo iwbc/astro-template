@@ -1,20 +1,53 @@
-# Astro Template
+# Astro テンプレート
 
-## Requirements
+## 必要な環境
 
 - Node.js v24.x
 - pnpm v11.x
 
-## Commands
+## コマンド
 
-All commands are run from the root of the project, from a terminal:
+すべてのコマンドは、プロジェクトのルートディレクトリからターミナルで実行します。
 
-| Command                          | Action                                           |
-| :------------------------------- | :----------------------------------------------- |
-| `pnpm install`                   | Installs dependencies                            |
-| `pnpm install --frozen-lockfile` | Installs dependencies strictly from the lockfile |
-| `pnpm dev`                       | Starts local dev server at `localhost:4321`      |
-| `pnpm build`                     | Build your production site to `./dist/`          |
-| `pnpm preview`                   | Preview your build locally, before deploying     |
-| `pnpm astro ...`                 | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro --help`              | Get help using the Astro CLI                     |
+| コマンド                         | 内容                                                       |
+| :------------------------------- | :--------------------------------------------------------- |
+| `pnpm install`                   | 依存パッケージをインストールします                         |
+| `pnpm install --frozen-lockfile` | ロックファイルに従って依存パッケージをインストールします   |
+| `pnpm dev`                       | `localhost:4321` で開発サーバーを起動します                |
+| `pnpm build`                     | 本番用のサイトを `./dist/` にビルドします                  |
+| `pnpm preview`                   | デプロイ前にビルド結果をローカルで確認します               |
+| `pnpm astro ...`                 | `astro add`、`astro check` などの CLI コマンドを実行します |
+| `pnpm astro --help`              | Astro CLI のヘルプを表示します                             |
+
+## AI コーディングエージェント
+
+Claude Code と Codex は、[AGENTS.md](AGENTS.md) のプロジェクト規約と、[.agents/skills](.agents/skills) の作業手順を共用します。規約や手順を変更するときは、これらのファイルを更新してください。`CLAUDE.md` は共通の指示書を読み込み、Claude のスキルとレビュー用エージェントは共通の作業手順を参照します。
+
+### セットアップと使い方
+
+Codex の対応環境は、macOS 上のアプリまたは CLI です。使用するエージェントをインストールしてサインインし、リポジトリのルートディレクトリで `pnpm install --frozen-lockfile` を実行してください。
+
+- **Codex アプリ:** このリポジトリをプロジェクトとして開き、新しいセッションを開始します。スキル選択欄で使用するスキルを選び、作業内容を指示してください。
+- **Codex CLI:** リポジトリのルートディレクトリで `codex` を実行します。スキルは下表の記法で明示的に呼び出します。
+- **Claude Code:** リポジトリのルートディレクトリで `claude` を実行します。既存のフック、MCP 設定、呼出し方法はそのまま使用できます。
+
+| 作業                                              | Codex CLI          | Claude Code                                      |
+| :------------------------------------------------ | :----------------- | :----------------------------------------------- |
+| 依存パッケージの更新                              | `$upgrade-deps`    | `/upgrade-deps`                                  |
+| HTML のセマンティクスとアクセシビリティのレビュー | `$markup-reviewer` | `markup-reviewer` エージェントの使用を指示します |
+
+依存更新スキルは明示的な呼出しが必要です。Codex アプリでは `upgrade-deps` を選択してください。呼出し制御は `.agents/skills/upgrade-deps/agents/openai.yaml` に設定しています。マークアップレビューはソースファイルを編集せず、指摘事項を報告します。
+
+同じ作業ツリーでは、エージェントを同時に使用しないでください。切り替えるときは `git status` と `git diff` を確認し、残りの作業を次のエージェントに伝えます。会話履歴は共有されません。プロジェクトの指示書を変更した後は、新しいセッションを開始してください。
+
+### 整形と検証
+
+Codex は [AGENTS.md](AGENTS.md) の手順に従い、変更したファイルだけを既存の ESLint、Stylelint、Prettier で整形します。コードを変更した場合は、続けて以下の検証を順番に実行し、失敗した検証や実行できなかった検証があれば報告します。
+
+```bash
+pnpm check
+pnpm lint
+pnpm build
+```
+
+Claude Code は既存の整形・型チェック用フックを引き続き使用します。共通の pre-commit チェックも維持しています。Codex 用のプロジェクト固有の MCP サーバーやフックは設定していません。完了前の検証と、`pnpm-lock.yaml` を pnpm 経由で更新する規約は、エージェントへの指示であり、フックによる機械的な強制ではありません。
